@@ -6,7 +6,7 @@ const MovieContainer = styled.div`
     flex-direction: column;
     padding: 10px;
     margin: 8px;
-    /* width: 280px; */
+    width: 280px;
     border-radius: 5px;
     box-shadow: 3px 3px 5px 2px #aaa;
     cursor: pointer;
@@ -40,14 +40,16 @@ const MovieInfo = styled.div`
 
 `
 
-function Moviecontainer() {
+function Moviecontainer(props) {
+    const { Title, Year, imdbID, Type, Poster } = props.movie;
     return (
         <MovieContainer>
-            <MovieImg src="https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg" />
-            <MovieName>Guardians of the Galaxy Vol. 2</MovieName>
+            {console.log(props.movie)}
+            <MovieImg src={Poster} />
+            <MovieName>{Title}</MovieName>
             <MovieInfoColumn>
-                <MovieInfo>Year :2014 </MovieInfo>
-                <MovieInfo>Type : Movie </MovieInfo>
+                <MovieInfo>Year : {Year} </MovieInfo>
+                <MovieInfo>Type : {Type} </MovieInfo>
             </MovieInfoColumn>
 
         </MovieContainer>
@@ -55,3 +57,8 @@ function Moviecontainer() {
 }
 
 export default Moviecontainer;
+
+
+
+
+

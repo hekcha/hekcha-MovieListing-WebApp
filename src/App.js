@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Moviecontainer from './components/MovieContainer'
+import axios from 'axios';
 
 const Container = styled.div`
     display: flex;
@@ -65,23 +66,28 @@ const MovieList = styled.div`
     justify-content: space-evenly;
     flex-wrap: wrap;
 `
-
+const API_KEY = "ab92e470";
 
 function App() {
 
     const [focus, setFocus] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [timeout, setTimeOut] = useState("");
+    const [searchData, setSearchData] = useState([]);
+
+    const fetchData = async(searchString) => {
+        const response = await axios.get(`http://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY} `);
+        setSearchData(response.data.Search);
+
+    }
 
     const onTextChange = (event) => {
         clearTimeout(timeout);
         setSearchQuery(event.target.value);
         const time = setTimeout(() => {
-            console.log("API called");
-        }, 500);
+            fetchData(event.target.value);
+        }, 2000);
         setTimeOut(time);
-
-        // console.log(searchQuery);
     }
 
 
@@ -95,19 +101,15 @@ function App() {
                 <NavSearch focus={focus} onFocus={() => {setFocus(true)} } onBlur={() => {setFocus(false)} }>
                     <FontAwesomeIcon icon={faMagnifyingGlass} size='xs' color='black' width="20px" height="20px" />
                     <SearchInput placeholder='Search Movie' value={searchQuery} onChange={onTextChange} />
-        {console.log(searchQuery)}
-
                 </NavSearch>
             </Navbar>
             <MovieList>
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
-                <Moviecontainer />
+                {
+                    searchData?.length
+                        ? searchData.map((movie, index) => <Moviecontainer key={index} movie={movie} /> ): "No Movie Found!"
+                }
+
+
             </MovieList>
 
 
