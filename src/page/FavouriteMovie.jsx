@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Moviecontainer from '../components/MovieContainer';
 import styled from 'styled-components';
 import Loading from '../assets/homepageloading.gif'
 import { useSelector } from 'react-redux';
+import FavmovieContainer from '../components/FavmovieContainer';
 
 
 const MovieList = styled.div`
@@ -14,7 +14,7 @@ const MovieList = styled.div`
 
 function FavouriteMovie() {
 
-    const data = useSelector((state) => state.addFavReducer.favMovieData);
+    const data = useSelector((state) => state.favReducer.favMovieData);
 
     return (
         <MovieList >
@@ -23,7 +23,7 @@ function FavouriteMovie() {
                 data?.length
                     ? data.map((movie, index) =>
 
-                        <div key={index} movie={movie} > {console.log(movie.data.Title)}</div>)
+                        <FavmovieContainer key={index} movie={movie} />)
                     : < img src={Loading} style={{ margin: "150px" }
                     } />
             }

@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
-import { addFav } from '../actions/index';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFav } from '../actions/index';
 
 
-const MovieContainer = styled.div`
+const FavMovieContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -17,9 +16,7 @@ const MovieContainer = styled.div`
     border-radius: 5px;
     box-shadow: 3px 3px 5px 2px #aaa;
     cursor: pointer;
-    &:hover {
-    scale: 1.05;
-  }
+
     `
 const MovieImg = styled.img`
     background-size: cover;
@@ -51,32 +48,41 @@ const MovieInfo = styled.div`
 
 `
 
+const Button = styled.div`
+    justify-content: center;
+    display: flex;
+    font-family: 'Kalam', cursive;
+    border: solid 1px;
+    margin: 5px;
+    background-color: #b74141;
+    border-radius: 10px;
+
+    &:hover {
+    scale: 1.05;
+  }
+
+`
 
 
-function Moviecontainer(props) {
+
+function FavmovieContainer(props) {
     const dispatch = useDispatch();
 
     const { Title, Year, imdbID, Type, Poster } = props.movie;
-    const movieInfo = { Title, Year, imdbID, Type, Poster };
-    const [toggleState, setToggleState] = useState(false);
+
 
     const toCapital = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    const notify = () => {
-        // dispatch call the action and then action go to reducer(HOW TO WORK?)
-        setToggleState(!toggleState);
-        dispatch(addFav(movieInfo));
-        // alert("Added to favourite")
+    const removeFavourite = (data) => {
+        dispatch(removeFav(data));
     }
 
-
-
-
+    const movieInfo = props.movie;
 
     return (
-        <MovieContainer >
+        <FavMovieContainer >
             {/* {console.log(props.movie)} */}
             <Link to={`${imdbID}`}>
                 {Poster !== "N/A" ? <MovieImg src={Poster} /> : <MovieImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
@@ -85,15 +91,15 @@ function Moviecontainer(props) {
             <MovieInfoColumn>
                 <MovieInfo>Year : {Year} </MovieInfo>
                 <MovieInfo>Type : {toCapital(Type)} </MovieInfo>
-                <FontAwesomeIcon icon={faHeart} size='xs' color={toggleState ? "red" : "black"} onClick={notify} />
-
+                <FontAwesomeIcon icon={faHeart} size='xs' />
             </MovieInfoColumn>
-        </MovieContainer >
+            <Button onClick={() => removeFavourite(movieInfo)}>Remove From Favourite</Button>
+        </FavMovieContainer >
 
     )
 }
 
-export default Moviecontainer;
+export default FavmovieContainer;
 
 
 

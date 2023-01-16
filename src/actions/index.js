@@ -3,14 +3,15 @@
 export const addFav = (data) => {
     return {
         type: 'favourites/addToFav',
-        payload: data, 
+        payload: data,
 
     }
 }
 
-export const removeFav = () => {
+export const removeFav = (data) => {
     return {
         type: 'favourites/removeFromFav',
+        payload: data,
 
     }
 }

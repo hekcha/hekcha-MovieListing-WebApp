@@ -62,6 +62,9 @@ const SearchInput = styled.input`
     outline: none;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 600;
+    @media (max-width: 520px) {
+    font-size: 12px;
+  }
 `
 
 const MovieList = styled.div`
@@ -70,6 +73,40 @@ const MovieList = styled.div`
     justify-content: space-evenly;
     flex-wrap: wrap;
 `
+
+const FavouriteBox = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 10px;
+    text-decoration: none !important;
+    font-size: 20px;
+    font-family: 'Kalam', cursive;
+    color: black;
+    /* border: 1px solid; */
+`
+
+const FavouriteTag = styled.div`
+    padding: 12px;
+    gap: 10px;
+    border-radius: 35px;
+    letter-spacing: 1px;
+    background-color: #2d7eff;
+    color: black;
+    &:hover{
+        scale: 1.02;
+        background-color: aquamarine;
+        color: black;
+        background-color: whitesmoke;
+        border: 5px solid #2d7eff;
+    }
+    @media (max-width: 520px) {
+    font-size: 12px;
+    padding: 7px;
+  }
+`
+
+
 const API_KEY = "ab92e470";
 
 function Homepage(props) {
@@ -82,8 +119,13 @@ function Homepage(props) {
     const setFavourites = props.setFavourites;
 
     const fetchData = async (searchString) => {
-        const response = await axios.get(`http://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY} `);
-        setSearchData(response.data.Search);
+        try {
+            const response = await axios.get(`http://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY} `);
+            setSearchData(response.data.Search);
+        } catch (error) {
+            alert(error.message);
+        }
+
 
     }
 
@@ -108,15 +150,15 @@ function Homepage(props) {
                     <FontAwesomeIcon icon={faMagnifyingGlass} size='xs' color='black' width="20px" height="20px" />
                     <SearchInput placeholder='Search Movie' value={searchQuery} onChange={onTextChange} />
                 </NavSearch>
-                <Link to="/favourite" favourites={favourites}>Favourite</Link>
             </Navbar>
+            <FavouriteBox ><FavouriteTag><Link to="/favourite" style={{ textDecoration: "none", color: "black" }}>Favourite</Link><FontAwesomeIcon icon={faHeart} size='xs' color='black' width="20px" height="20px" /></FavouriteTag></FavouriteBox>
             <MovieList>
                 {
                     searchData?.length
                         ? searchData.map((movie, index) =>
 
                             <Moviecontainer key={index} movie={movie} favourites={favourites} setFavourites={setFavourites} />)
-                        : <img src={Loading} style={{ margin: "150px" }} />
+                        : <img src={Loading} style={{ margin: "120px" }} />
                 }
             </MovieList>
         </Container>
