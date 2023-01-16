@@ -8,6 +8,7 @@ import axios from 'axios';
 import Loading from '../assets/homepageloading.gif'
 import { Link } from 'react-router-dom';
 
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,12 +24,12 @@ const Navbar = styled.nav`
     background-color: #292929;
     color:  white;
     font-family: 'Kalam', cursive;
+    font-weight: bolder;
+    box-shadow: 0 3px 6px 0 #555;
     font-size: 28px;
     @media (max-width: 520px) {
     font-size: 14px;
   }
-    font-weight: bolder;
-    box-shadow: 0 3px 6px 0 #555;
 `
 
 const NavIcon = styled.img`
@@ -94,7 +95,7 @@ function Homepage(props) {
         }, 500);
         setTimeOut(time);
     }
-
+    // we are not using html here we are using jsx here because we can't use js in html
 
     return (
         <Container>

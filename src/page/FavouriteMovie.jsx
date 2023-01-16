@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Moviecontainer from '../components/MovieContainer';
 import styled from 'styled-components';
 import Loading from '../assets/homepageloading.gif'
+import { useSelector } from 'react-redux';
 
 
 const MovieList = styled.div`
@@ -11,19 +12,22 @@ const MovieList = styled.div`
     flex-wrap: wrap;
 `
 
-function FavouriteMovie(props) {
-    console.log(props.favourites);
-    const data = props.favourites;
+function FavouriteMovie() {
+
+    const data = useSelector((state) => state.addFavReducer.favMovieData);
+
     return (
-        <MovieList>
+        <MovieList >
+            {console.log(data)}
             {
                 data?.length
                     ? data.map((movie, index) =>
 
-                        <Moviecontainer key={index} movie={movie} />)
-                    : <img src={Loading} style={{ margin: "150px" }} />
+                        <div key={index} movie={movie} > {console.log(movie.data.Title)}</div>)
+                    : < img src={Loading} style={{ margin: "150px" }
+                    } />
             }
-        </MovieList>
+        </MovieList >
     )
 }
 

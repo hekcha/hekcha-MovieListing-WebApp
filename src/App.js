@@ -8,23 +8,23 @@ import { useState, useEffect } from 'react';
 
 function App() {
 
-    const [favourites, setFavourites] = useState(() => {
-        const storedFavourites = localStorage.getItem('favourite');
-        return storedFavourites ? JSON.parse(storedFavourites) : [];
-    });//change this to set
+    // const [favourites, setFavourites] = useState(() => {
+    //     const storedFavourites = localStorage.getItem('favourite');
+    //     return storedFavourites ? JSON.parse(storedFavourites) : [];
+    // });//change this to set
 
-      useEffect(() => {
-          localStorage.setItem('favourite', JSON.stringify(favourites));
-    }, [favourites]);
+    //   useEffect(() => {
+    //       localStorage.setItem('favourite', JSON.stringify(favourites));
+    // }, [favourites]);
 
 
     return (
         <div className='App'>
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={<Homepage favourites={favourites} setFavourites={setFavourites} />} />
+                    <Route exact path="/" element={<Homepage />} />
                     <Route path="/:id" element={<MovieInfoComponent/>} />
-                    <Route path="/favourite" element={<FavouriteMovie favourites={favourites} setFavourites={setFavourites} />} />
+                    <Route path="/favourite" element={<FavouriteMovie  />} />
                 </Routes>
             </BrowserRouter>
         </div>
