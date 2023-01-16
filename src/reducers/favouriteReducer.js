@@ -1,6 +1,6 @@
 // reducers are pure function so it says that you initially pass the state
 const initialData = {
-    favMovieData: []
+    favMovieData: JSON.parse(localStorage.getItem('key_name')) || []
 }
 
 

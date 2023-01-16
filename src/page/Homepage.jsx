@@ -107,20 +107,21 @@ const FavouriteTag = styled.div`
 `
 
 
-const API_KEY = "ab92e470";
 
 function Homepage(props) {
 
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const [focus, setFocus] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [timeout, setTimeOut] = useState("");
     const [searchData, setSearchData] = useState([]);
     const favourites = props.favourites;
     const setFavourites = props.setFavourites;
+    // console.log(API_KEY);
 
     const fetchData = async (searchString) => {
         try {
-            const response = await axios.get(`http://www.omdbapi.com/?s=${searchString}&apikey=${API_KEY} `);
+            const response = await axios.get(`http://www.omdbapi.com/?s=${[searchString]}&apikey=${API_KEY} `);
             setSearchData(response.data.Search);
         } catch (error) {
             alert(error.message);
@@ -140,7 +141,7 @@ function Homepage(props) {
     // we are not using html here we are using jsx here because we can't use js in html
 
     return (
-        <Container>
+        <Container Container >
             <Navbar>
                 <AppName>
                     <NavIcon src={icon} />
@@ -148,7 +149,7 @@ function Homepage(props) {
                 </AppName>
                 <NavSearch focus={focus} onFocus={() => { setFocus(true) }} onBlur={() => { setFocus(false) }}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} size='xs' color='black' width="20px" height="20px" />
-                    <SearchInput placeholder='Search Movie' value={searchQuery} onChange={onTextChange} />
+                    <SearchInput placeholder='Search Movie' value={searchQuery} onChange={onTextChange} active />
                 </NavSearch>
             </Navbar>
             <FavouriteBox ><FavouriteTag><Link to="/favourite" style={{ textDecoration: "none", color: "black" }}>Favourite</Link><FontAwesomeIcon icon={faHeart} size='xs' color='black' width="20px" height="20px" /></FavouriteTag></FavouriteBox>
@@ -161,7 +162,7 @@ function Homepage(props) {
                         : <img src={Loading} style={{ margin: "120px" }} />
                 }
             </MovieList>
-        </Container>
+        </Container >
     );
 }
 

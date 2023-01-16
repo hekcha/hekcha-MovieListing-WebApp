@@ -60,16 +60,31 @@ function Moviecontainer(props) {
     const movieInfo = { Title, Year, imdbID, Type, Poster };
     const [toggleState, setToggleState] = useState(false);
 
+    const data = useSelector((state) => state.favReducer.favMovieData);
+
     const toCapital = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
+
+    // useEffect(() => {
+    //     console.log(data);
+    //     localStorage.setItem('data', localStorage.getItem('data') + JSON.stringify(data));
+    // }, [data])
 
     const notify = () => {
         // dispatch call the action and then action go to reducer(HOW TO WORK?)
         setToggleState(!toggleState);
         dispatch(addFav(movieInfo));
+        // const arr = JSON.parse(localStorage.getItem('key_name')) || [];
+        // arr.push(...data);
+        // console.log(arr);
+
         // alert("Added to favourite")
     }
+
+    useEffect(() => {
+        localStorage.setItem('key_name', JSON.stringify(data));
+    }, [data])
 
 
 
@@ -77,7 +92,6 @@ function Moviecontainer(props) {
 
     return (
         <MovieContainer >
-            {/* {console.log(props.movie)} */}
             <Link to={`${imdbID}`}>
                 {Poster !== "N/A" ? <MovieImg src={Poster} /> : <MovieImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
             </Link>

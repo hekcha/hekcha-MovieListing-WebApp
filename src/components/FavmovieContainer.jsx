@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFav } from '../actions/index';
-
+import { useEffect } from 'react';
 
 const FavMovieContainer = styled.div`
     display: flex;
@@ -69,6 +69,8 @@ function FavmovieContainer(props) {
     const dispatch = useDispatch();
 
     const { Title, Year, imdbID, Type, Poster } = props.movie;
+    const data = useSelector((state) => state.favReducer.favMovieData);
+
 
 
     const toCapital = (str) => {
@@ -78,6 +80,10 @@ function FavmovieContainer(props) {
     const removeFavourite = (data) => {
         dispatch(removeFav(data));
     }
+
+    useEffect(() => {
+        localStorage.setItem('key_name', JSON.stringify(data));
+    }, [data])
 
     const movieInfo = props.movie;
 

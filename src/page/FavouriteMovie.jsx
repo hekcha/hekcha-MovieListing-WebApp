@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Loading from '../assets/homepageloading.gif'
 import { useSelector } from 'react-redux';
@@ -16,6 +17,9 @@ function FavouriteMovie() {
 
     const data = useSelector((state) => state.favReducer.favMovieData);
 
+
+
+
     return (
         <MovieList >
             {console.log(data)}
@@ -24,8 +28,7 @@ function FavouriteMovie() {
                     ? data.map((movie, index) =>
 
                         <FavmovieContainer key={index} movie={movie} />)
-                    : < img src={Loading} style={{ margin: "150px" }
-                    } />
+                    : < img src={Loading} style={{ margin: "150px" }} />
             }
         </MovieList >
     )
