@@ -16,6 +16,10 @@ const FavMovieContainer = styled.div`
     border-radius: 5px;
     box-shadow: 3px 3px 5px 2px #aaa;
     cursor: pointer;
+    &:hover{
+        border: 2px 4px 10px solid green;
+        box-shadow:0 0 2px 3px #e197be;
+    }
 
     `
 const MovieImg = styled.img`
@@ -54,11 +58,15 @@ const Button = styled.div`
     font-family: 'Kalam', cursive;
     border: solid 1px;
     margin: 5px;
-    background-color: #b74141;
+    font-weight: 600;
+    background-color: #2d7eff;
     border-radius: 10px;
+    color: black;
 
     &:hover {
     scale: 1.05;
+    background-color: #1b1a1a;
+    color: white;
   }
 
 `
@@ -69,7 +77,7 @@ function FavmovieContainer(props) {
     const dispatch = useDispatch();
 
     const { Title, Year, imdbID, Type, Poster } = props.movie;
-    const data = useSelector((state) => state.favReducer.favMovieData);
+    const stateData = useSelector((state) => state.favReducer.favMovieData);
 
 
 
@@ -79,25 +87,26 @@ function FavmovieContainer(props) {
 
     const removeFavourite = (data) => {
         dispatch(removeFav(data));
+        var arr = [];
+        console.log(stateData.length);
+        if (stateData.length == 1)
+            localStorage.clear();
     }
 
     useEffect(() => {
-        localStorage.setItem('key_name', JSON.stringify(data));
-    }, [data])
+        localStorage.setItem('key_name', JSON.stringify(stateData));
+    }, [stateData])
 
     const movieInfo = props.movie;
 
     return (
         <FavMovieContainer >
             {/* {console.log(props.movie)} */}
-            <Link to={`${imdbID}`}>
-                {Poster !== "N/A" ? <MovieImg src={Poster} /> : <MovieImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
-            </Link>
+            {Poster !== "N/A" ? <MovieImg src={Poster} /> : <MovieImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
             <MovieName>{Title}</MovieName>
             <MovieInfoColumn>
                 <MovieInfo>Year : {Year} </MovieInfo>
                 <MovieInfo>Type : {toCapital(Type)} </MovieInfo>
-                <FontAwesomeIcon icon={faHeart} size='xs' />
             </MovieInfoColumn>
             <Button onClick={() => removeFavourite(movieInfo)}>Remove From Favourite</Button>
         </FavMovieContainer >

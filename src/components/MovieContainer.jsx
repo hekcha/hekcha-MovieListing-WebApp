@@ -19,7 +19,9 @@ const MovieContainer = styled.div`
     cursor: pointer;
     &:hover {
     scale: 1.05;
-  }
+    border: 2px 4px 10px solid green;
+        box-shadow: 0 0 2px 3px #48abe0;
+    }
     `
 const MovieImg = styled.img`
     background-size: cover;
@@ -74,6 +76,7 @@ function Moviecontainer(props) {
     const notify = () => {
         // dispatch call the action and then action go to reducer(HOW TO WORK?)
         setToggleState(!toggleState);
+        console.log(movieInfo);
         dispatch(addFav(movieInfo));
         // const arr = JSON.parse(localStorage.getItem('key_name')) || [];
         // arr.push(...data);
@@ -92,6 +95,7 @@ function Moviecontainer(props) {
 
     return (
         <MovieContainer >
+            {/* {console.log(movieInfo)} */}
             <Link to={`${imdbID}`}>
                 {Poster !== "N/A" ? <MovieImg src={Poster} /> : <MovieImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
             </Link>
@@ -99,7 +103,7 @@ function Moviecontainer(props) {
             <MovieInfoColumn>
                 <MovieInfo>Year : {Year} </MovieInfo>
                 <MovieInfo>Type : {toCapital(Type)} </MovieInfo>
-                <FontAwesomeIcon icon={faHeart} size='xs' color={toggleState ? "red" : "black"} onClick={notify} />
+                <FontAwesomeIcon icon={faHeart} size='sm' color={toggleState ? "red" : "black"} onClick={notify} />
 
             </MovieInfoColumn>
         </MovieContainer >

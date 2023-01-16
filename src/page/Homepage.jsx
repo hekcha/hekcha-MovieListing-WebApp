@@ -7,6 +7,7 @@ import Moviecontainer from '../components/MovieContainer'
 import axios from 'axios';
 import Loading from '../assets/homepageloading.gif'
 import { Link } from 'react-router-dom';
+import DummyData from '../components/DummyData';
 
 
 const Container = styled.div`
@@ -98,7 +99,7 @@ const FavouriteTag = styled.div`
         background-color: aquamarine;
         color: black;
         background-color: whitesmoke;
-        border: 5px solid #2d7eff;
+        /* border: 5px solid #2d7eff; */
     }
     @media (max-width: 520px) {
     font-size: 12px;
@@ -153,13 +154,14 @@ function Homepage(props) {
                 </NavSearch>
             </Navbar>
             <FavouriteBox ><FavouriteTag><Link to="/favourite" style={{ textDecoration: "none", color: "black" }}>Favourite</Link><FontAwesomeIcon icon={faHeart} size='xs' color='black' width="20px" height="20px" /></FavouriteTag></FavouriteBox>
+
             <MovieList>
                 {
                     searchData?.length
                         ? searchData.map((movie, index) =>
 
                             <Moviecontainer key={index} movie={movie} favourites={favourites} setFavourites={setFavourites} />)
-                        : <img src={Loading} style={{ margin: "120px" }} />
+                        : <DummyData />
                 }
             </MovieList>
         </Container >

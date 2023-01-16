@@ -4,13 +4,34 @@ import styled from 'styled-components';
 import Loading from '../assets/homepageloading.gif'
 import { useSelector } from 'react-redux';
 import FavmovieContainer from '../components/FavmovieContainer';
+import Moviecontainer from '../components/MovieContainer';
 
 
 const MovieList = styled.div`
     display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+`
+
+const MovieContainer = styled.div`
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
+`
+const MovieHeading = styled.div`
+    margin: 20px auto;
+    font-weight: 600;
+    font-size: 40px;
+    font-family: 'Pacifico', cursive;
+    justify-content: center;
+    text-shadow: magenta 1px 0 10px;
+    color: white;
+     @media (max-width: 520px) {
+    font-size: 25px;
+  }
 `
 
 function FavouriteMovie() {
@@ -22,14 +43,17 @@ function FavouriteMovie() {
 
     return (
         <MovieList >
-            {console.log(data)}
-            {
-                data?.length
-                    ? data.map((movie, index) =>
+            <MovieHeading>Your Favourite Movies❤️</MovieHeading>
+            <MovieContainer>
+                {/* {console.log(data)} */}
+                {
+                    data?.length
+                        ? data.map((movie, index) =>
 
-                        <FavmovieContainer key={index} movie={movie} />)
-                    : < img src={Loading} style={{ margin: "150px" }} />
-            }
+                            <FavmovieContainer key={index} movie={movie} />)
+                        : < img src={Loading} style={{ margin: "150px" }} />
+                }
+            </MovieContainer>
         </MovieList >
     )
 }
