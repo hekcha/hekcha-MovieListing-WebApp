@@ -39,8 +39,8 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-> #Code Architecture Description
-
+#Code Architecture Description
+>
 >> The code architecture for the movie search application is designed using React for the front-end, Redux for state management, Firebase for hosting, and Styled Components for CSS. The application is composed of various pages that are routed from the App.js file, which acts as the root component for the entire application.
 
 >> The home page of the application serves as the main point of interaction for the user, where they can search for movies by entering keywords into a search bar. The search bar is connected to a debouncing function, which ensures that the API request is sent only after a certain amount of time has passed since the user's last keystroke. This helps prevent overwhelming the API server with too many requests.
@@ -56,6 +56,6 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 >> Data persistency is achieved in the movie search application by using the local storage of the user's browser. Whenever the state data is updated, for example, when a movie is added to the favorites list, this data is also saved to the local storage. This ensures that the data is retained even if the user closes the browser or if the session expires. When the application is loaded again, the data is retrieved from the local storage and used to re-populate the state, providing a seamless user experience.
 
->> >> It's also worth noting that the Local Storage has a limited space of around 5mb, depending on the browser and device, therefore it's good practice to be aware of that and to consider alternative solutions like IndexedDB, WebSQL or even a server-side storage if the data exceeds the limit of Local Storage.
+>> It's also worth noting that the Local Storage has a limited space of around 5mb, depending on the browser and device, therefore it's good practice to be aware of that and to consider alternative solutions like IndexedDB, WebSQL or even a server-side storage if the data exceeds the limit of Local Storage.
 
 >> Finally, Firebase is used to host the application, providing a scalable and reliable platform for the movie search application. The application is also styled using Styled Components, which allows for easy management of CSS styles and a consistent look and feel throughout the application.
