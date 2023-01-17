@@ -10,8 +10,11 @@ import Moviecontainer from '../components/MovieContainer';
 const MovieList = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    justify-content: center;
+    @media (max-width: 520px) {
+        margin: auto;
+    font-size: 25px;
+  }
 
 `
 
@@ -19,19 +22,24 @@ const MovieContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 `
 const MovieHeading = styled.div`
-    margin: 20px auto;
+    display: inline-flex;
+    flex-direction: row;
+    margin: 2rem auto;
+    width: 100%;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 3vw;
     font-family: 'Pacifico', cursive;
     justify-content: center;
     text-shadow: magenta 1px 0 10px;
     color: white;
-     @media (max-width: 520px) {
-    font-size: 25px;
-  }
+    @media(max-width: 800px) {
+        /* width: 50%; */
+        font-size: 27px;
+    }
+
 `
 
 function FavouriteMovie() {
