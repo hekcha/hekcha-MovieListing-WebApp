@@ -79,20 +79,24 @@ function FavmovieContainer(props) {
     const { Title, Year, imdbID, Type, Poster } = props.movie;
     const stateData = useSelector((state) => state.favReducer.favMovieData);
 
-
-
+    // Function to capitalize the first letter of a string
     const toCapital = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    // Function to remove movie from favourite list
     const removeFavourite = (data) => {
+        // Dispatch the removeFav action to update the redux store
         dispatch(removeFav(data));
+
+        // Clear local storage if there are no more favourite movies
         var arr = [];
-        console.log(stateData.length);
-        if (stateData.length == 1)
+        if (stateData.length == 1) {
             localStorage.clear();
+        }
     }
 
+    // Keep localstorage updated with the current favourite movie data
     useEffect(() => {
         localStorage.setItem('key_name', JSON.stringify(stateData));
     }, [stateData])

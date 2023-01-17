@@ -39,7 +39,6 @@ const NavIcon = styled.img`
     margin-top: -20px;
     top: 6px;
     position: relative;
-
 `;
 
 const NavSearch = styled.div`
@@ -122,8 +121,23 @@ function Homepage(props) {
 
     const fetchData = async (searchString) => {
         try {
-            const response = await axios.get(`http://www.omdbapi.com/?s=${[searchString]}&apikey=${API_KEY} `);
-            setSearchData(response.data.Search);
+            const response1 = await axios.get(`http://www.omdbapi.com/?s=${[searchString]}&apikey=${API_KEY}&page=1 `);
+            const response2 = await axios.get(`http://www.omdbapi.com/?s=${[searchString]}&apikey=${API_KEY}&page=2 `);
+            const response3 = await axios.get(`http://www.omdbapi.com/?s=${[searchString]}&apikey=${API_KEY}&page=3 `);
+            var movieListArr = [];
+            console.log(response1);
+            console.log(response2);
+            console.log(response3);
+            if (response1.data.Response === "False" && response1.data.Response === "False" && response1.data.Response === "False")
+                alert("No movie Found");
+            if (response1.data.Response === "True")
+                movieListArr.push(...response1.data.Search);
+            if (response2.data.Response === "True")
+                movieListArr.push(...response2.data.Search);
+            if (response3.data.Response === "True")
+                movieListArr.push(...response3.data.Search);
+            setSearchData(movieListArr);
+            console.log(movieListArr)
         } catch (error) {
             alert(error.message);
         }

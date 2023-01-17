@@ -53,6 +53,8 @@ const DummyInfoColumn = styled.div`
 const DummyInfo = styled.div`
 
 `
+
+// data for adding to the dummy component
 const data = [
     {
         "Title": "Avengers: Endgame",
@@ -109,31 +111,32 @@ const data = [
 
 
 function DummyData() {
+    // function to capitalize first letter of a string
     const toCapital = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    return (<Main>
-        {
-            data.map((movie, index) =>
-                <DummyContainer key={index}>
-                    {/* {console.log(movie.Title)} */}
-                    <Link >
-                        {movie.Poster !== "N/A" ? <DummyImg src={movie.Poster} /> : <DummyImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
-                    </Link>
-                    <DummyName>{movie.Title}</DummyName>
-                    <DummyInfoColumn>
-                        <DummyInfo>Year : {movie.Year} </DummyInfo>
-                        <DummyInfo>Type : {toCapital(movie.Type)} </DummyInfo>
-                    </DummyInfoColumn>
-                </DummyContainer >
-            )
-        }</Main>
+    return (
+        <Main>
+            {
+                data.map((movie, index) =>
+                    <DummyContainer key={index}>
+                        {/* {console.log(movie.Title)} */}
+                        <Link >
+                            {/* Check if the movie poster is available, if not use a placeholder image */}
+                            {movie.Poster !== "N/A" ? <DummyImg src={movie.Poster} /> : <DummyImg src="https://punjabipollywood.com/wp-content/uploads/2018/12/Not-Available.jpg" />}
+                        </Link>
+                        <DummyName>{movie.Title}</DummyName>
+                        <DummyInfoColumn>
+                            <DummyInfo>Year : {movie.Year} </DummyInfo>
+                            <DummyInfo>Type : {toCapital(movie.Type)} </DummyInfo>
+                        </DummyInfoColumn>
+                    </DummyContainer >
+                )
+            }
+        </Main>
 
     )
 }
 
 export default DummyData;
-
-
-

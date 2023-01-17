@@ -1,17 +1,21 @@
-// First we have to tell that what actions we have to perform
-
+/**
+ * addFav - Action creator for adding an item to favorites
+ *
+ * @param {Object} data - The data of the item to add to favorites
+ *
+ * @returns {Object} - Action object with type 'favourites/addToFav' and payload 'data'
+ */
 export const addFav = (data) => {
     return {
         type: 'favourites/addToFav',
-        payload: data,
-
+        payload: data
     }
 }
+
 
 export const removeFav = (data) => {
     return {
         type: 'favourites/removeFromFav',
-        payload: data,
-
+        payload: data
     }
 }

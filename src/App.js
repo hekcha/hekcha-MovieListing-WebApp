@@ -3,20 +3,9 @@ import { BrowserRouter, Routes, Route, json } from 'react-router-dom';
 import Homepage from "./page/Homepage"
 import FavouriteMovie from "./page/FavouriteMovie"
 import MovieInfoComponent from "./components/MovieInfoComponent"
-import { useState, useEffect } from 'react';
 
 
 function App() {
-
-    // const [favourites, setFavourites] = useState(() => {
-    //     const storedFavourites = localStorage.getItem('favourite');
-    //     return storedFavourites ? JSON.parse(storedFavourites) : [];
-    // });//change this to set
-
-    //   useEffect(() => {
-    //       localStorage.setItem('favourite', JSON.stringify(favourites));
-    // }, [favourites]);
-
 
     return (
         <div className='App'>

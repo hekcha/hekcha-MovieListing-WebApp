@@ -68,30 +68,17 @@ function Moviecontainer(props) {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // useEffect(() => {
-    //     console.log(data);
-    //     localStorage.setItem('data', localStorage.getItem('data') + JSON.stringify(data));
-    // }, [data])
-
+    // function that toggle the state of the button and adds the selected movie to the favorite list
     const notify = () => {
-        // dispatch call the action and then action go to reducer(HOW TO WORK?)
         setToggleState(!toggleState);
         console.log(movieInfo);
         dispatch(addFav(movieInfo));
-        // const arr = JSON.parse(localStorage.getItem('key_name')) || [];
-        // arr.push(...data);
-        // console.log(arr);
-
-        // alert("Added to favourite")
     }
 
+    // useEffect hook to update the localStorage with the updated favorite movie list
     useEffect(() => {
         localStorage.setItem('key_name', JSON.stringify(data));
     }, [data])
-
-
-
-
 
     return (
         <MovieContainer >

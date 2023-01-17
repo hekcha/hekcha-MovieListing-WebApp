@@ -35,11 +35,8 @@ const MovieHeading = styled.div`
 `
 
 function FavouriteMovie() {
-
+    // Use the useSelector hook from the react-redux library to access the favMovieData from the store
     const data = useSelector((state) => state.favReducer.favMovieData);
-
-
-
 
     return (
         <MovieList >
@@ -49,7 +46,7 @@ function FavouriteMovie() {
                 {
                     data?.length
                         ? data.map((movie, index) =>
-
+                            // render FavmovieContainer component for each movie in favMovieData array
                             <FavmovieContainer key={index} movie={movie} />)
                         : < img src={Loading} style={{ margin: "150px" }} />
                 }
